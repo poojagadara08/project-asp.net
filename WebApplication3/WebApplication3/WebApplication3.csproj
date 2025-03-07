@@ -67,8 +67,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Address.aspx" />
+    <Content Include="admin\register.aspx" />
+    <Content Include="admin\Contact.aspx" />
+    <Content Include="admin\Address.aspx" />
+    <Content Include="admin\AdminProduct.aspx" />
     <Content Include="cart.aspx" />
     <Content Include="packages.config" />
+    <Content Include="Payment.aspx" />
     <Content Include="shop1.aspx" />
     <Content Include="shop2.aspx" />
     <Content Include="shop3.aspx" />
@@ -83,6 +89,7 @@
     <Content Include="Shop.aspx" />
     <Content Include="Glasses.aspx" />
     <Content Include="Contact.aspx" />
+    <Content Include="admin\admin.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -97,6 +104,20 @@
     <Content Include="register.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Address.aspx.cs">
+      <DependentUpon>Address.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Address.aspx.designer.cs">
+      <DependentUpon>Address.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\admin.Master.cs">
+      <DependentUpon>admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\admin.Master.designer.cs">
+      <DependentUpon>admin.Master</DependentUpon>
+    </Compile>
     <Compile Include="admin\indexx.aspx.cs">
       <DependentUpon>indexx.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -104,12 +125,47 @@
     <Compile Include="admin\indexx.aspx.designer.cs">
       <DependentUpon>indexx.aspx</DependentUpon>
     </Compile>
+    <Compile Include="admin\register.aspx.cs">
+      <DependentUpon>register.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\register.aspx.designer.cs">
+      <DependentUpon>register.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Contact.aspx.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Contact.aspx.designer.cs">
+      <DependentUpon>Contact.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Address.aspx.cs">
+      <DependentUpon>Address.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Address.aspx.designer.cs">
+      <DependentUpon>Address.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="admin\AdminProduct.aspx.cs">
+      <DependentUpon>AdminProduct.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\AdminProduct.aspx.designer.cs">
+      <DependentUpon>AdminProduct.aspx</DependentUpon>
+    </Compile>
     <Compile Include="cart.aspx.cs">
       <DependentUpon>cart.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="cart.aspx.designer.cs">
       <DependentUpon>cart.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Payment.aspx.cs">
+      <DependentUpon>Payment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Payment.aspx.designer.cs">
+      <DependentUpon>Payment.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="login.aspx.cs">
@@ -119,7 +175,6 @@
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\ClassItem.cs" />
     <Compile Include="shop1.aspx.cs">
       <DependentUpon>shop1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -7,32 +7,29 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet"/>
     <style>
         body {
-            background-color: ButtonHighlight; /* Light gray background color for the entire page */
+            background-color: ButtonHighlight;
             margin: 0;
-            height: 100vh; /* Full height */
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
         }
-
         .container {
-            background-color: lightgoldenrodyellow; /* White background for the content area */
+            background-color: lightgoldenrodyellow;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             padding: 40px;
-            width: 80%; /* Responsive width */
-            max-width: 600px; /* Maximum width */
+            width: 80%;
+            max-width: 600px;
         }
-
         .product-card {
             border: 1px solid #ccc;
             border-radius: 10px;
             padding: 20px;
             text-align: center;
         }
-
         .btn {
-            margin: 10px; /* Space between buttons */
+            margin: 10px;
         }
     </style>
 </head>
@@ -43,11 +40,11 @@
                 <div class="col-md-12">
                     <div class="product-card">
                         <img src="images/g-1.png" alt="Product Image" class="img-fluid" />
-                        <h3>Lorem Ipsum dolor</h3>
-                        <p>Description of the product goes here.</p>
+                        <h3>Luminary Black Oversize</h3>
+                        <p>Color: Purple x Matte Black</p>
                         <p>Price: $50</p>
                         <asp:Button ID="btnAddToCart" runat="server" Text="Add to Cart" CssClass="btn btn-success" OnClick="btnAddToCart_Click" />
-                        <asp:Button ID="btnBuyNow" runat="server" Text="Buy Now" CssClass="btn btn-primary" OnClick="btnBuyNow_Click" />
+                         <asp:Button ID="btnBuyNow" runat="server" Text="Buy Now" CssClass="btn btn-primary" OnClick="btnBuyNow_Click" />
                     </div>
                 </div>
             </div>

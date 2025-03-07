@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.UI;
-using WebApplication3.Properties; // Ensure this matches the namespace of your CartItem class
 
 namespace WebApplication3.Properties
 {
-    public partial class shop1 : System.Web.UI.Page
+    public partial class shop1 : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -14,38 +13,84 @@ namespace WebApplication3.Properties
 
         protected void btnAddToCart_Click(object sender, EventArgs e)
         {
-            // Capture product details
-            string productName = "Lorem Ipsum dolor"; // This should be dynamic based on the product
-            decimal productPrice = 50; // This should be dynamic based on the product
-            int quantity = 1; // Default quantity
+            // Create a new product object for the item being added to the cart
+            Product product = new Product
+            {
+                ProductId = 1, // Unique ID for the product
+                Name = "Luminary Black Oversize", // Product name
+                Color = "Purple x Matte Black", // Product color
+                Price = 50.00m, // Product price
+                Quantity = 1, // Default quantity
+                ImageUrl = "images/g-1.png"
+            };
 
-            // Create a cart item using the constructor with parameters
-            var cartItem = new CartItem(productName, productPrice, quantity);
+            // Add the product to the cart
+            List<Product> cart = GetCart();
+            cart.Add(product);
+            SaveCart(cart);
 
-            // Add the item to the cart (session)
-            List<CartItem> cart = (List<CartItem>)Session["Cart"] ?? new List<CartItem>();
-            cart.Add(cartItem);
+            // Redirect to the cart page
+            Response.Redirect("Cart.aspx");
+        }
+
+        private List<Product> GetCart()
+        {
+            // Check if the cart exists in the session; if not, create a new one
+            if (Session["Cart"] == null)
+            {
+                Session["Cart"] = new List<Product>();
+            }
+            return (List<Product>)Session["Cart"];
+        }
+
+        private void SaveCart(List<Product> cart)
+        {
+            // Save the updated cart back to the session
             Session["Cart"] = cart;
+        }
+        protected void btnBuyNow_Click(object sender, EventArgs e)
+        {
+            // Example product details (you would typically get these from your data source)
+            int productId = 1; // Replace with actual product ID
+            string productName = "Luminary Black Oversize"; // Replace with actual product name
+            string color = "Purple x Matte Black";
+            decimal productPrice = 50m; // Replace with actual product price
+
+
+            // Create a new product item
+            Product product = new Product
+            {
+
+                Name = productName,
+                Color = color,
+                Price = productPrice,
+                Quantity = 1,// Default quantity
+                ImageUrl = "images/g-1.png"
+            };
+
+            // Check if the cart session exists, if not create it
+            if (Session["Cart"] == null)
+            {
+                Session["Cart"] = new List<Product>(); // Initialize a new cart
+            }
+
+            // Add the item to the cart
+            var cart = (List<Product>)Session["Cart"];
+            cart.Add(product);
 
             // Redirect to the cart page
             Response.Redirect("cart.aspx");
         }
-
-        protected void btnBuyNow_Click(object sender, EventArgs e)
-        {
-            // Similar logic as Add to Cart, but redirect to checkout
-            string productName = "Lorem Ipsum dolor"; // This should be dynamic based on the product
-            decimal productPrice = 50; // This should be dynamic based on the product
-            int quantity = 1; // Default quantity
-
-            // Create a cart item using the constructor with parameters
-            var cartItem = new CartItem(productName, productPrice, quantity);
-
-            List<CartItem> cart = (List<CartItem>)Session["Cart"] ?? new List<CartItem>();
-            cart.Add(cartItem);
-            Session["Cart"] = cart;
-
-            Response.Redirect("checkout.aspx"); // Change to your actual checkout page
-        }
     }
+
+   
+    //public class Product
+    //{
+    //    public int ProductId { get; set; }
+    //    public string Name { get; set; }
+    //    public string Color { get; set; }
+    //    public decimal Price { get; set; }
+    //    public int Quantity { get; set; }
+    //    public decimal TotalPrice => Price * Quantity; // Calculate total price for the item
+    //}
 }

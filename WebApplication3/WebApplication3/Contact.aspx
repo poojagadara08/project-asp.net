@@ -11,26 +11,25 @@
       <div class="">
         <div class="row">
           <div class="col-md-6 mx-auto">
-            <form action="#">
+            <form action="#" runat="server">
               <div class="contact_form-container">
                 <div>
-                  <div>
-                    <input type="text" placeholder="Name">
-                  </div>
-                  <div>
-                    <input type="text" placeholder="Phone Number">
-                  </div>
-                  <div>
-                    <input type="email" placeholder="Email">
-                  </div>
-                  <div class="">
-                    <input type="text" placeholder="Message" class="message_input">
-                  </div>
-                  <div class="mt-5 d-flex justify-content-center ">
-                    <button type="submit">
-                      Send
-                    </button>
-                  </div>
+
+                 <div class="form-group">
+                        <asp:TextBox ID="txtName" runat="server" CssClass="form-control" Placeholder="Name"></asp:TextBox>
+                    </div>
+                    <div class="form-group">
+                        <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control" Placeholder="Phone Number"></asp:TextBox>
+                    </div>
+                    <div class="form-group">
+                        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" TextMode="Email" Placeholder="Email"></asp:TextBox>
+                    </div>
+                    <div class="form-group">
+                        <asp:TextBox ID="txtMessage" runat="server" CssClass="form-control message_input" TextMode="MultiLine" Placeholder="Message"></asp:TextBox>
+                    </div>
+                    <div class="mt-5 d-flex justify-content-center">
+                        <asp:Button ID="btnSend" runat="server" CssClass="btn btn-primary" Text="Send" OnClick="btnSend_Click" />
+                    </div>
                 </div>
 
               </div>

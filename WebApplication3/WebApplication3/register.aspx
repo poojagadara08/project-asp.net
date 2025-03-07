@@ -42,7 +42,7 @@
                             <div class="card" style="border-radius: 15px;">
                                 <div class="card-body p-5">
                                     <h2 class="text-uppercase text-center mb-5">Create an account</h2>
-
+                                     <asp:Label ID="lblMessage" runat="server" ForeColor="Green" />
                                     <!-- Registration Form -->
                                     <div class="form-outline mb-4">
                                         <asp:TextBox ID="txtName" runat="server" CssClass="form-control form-control-lg" />
@@ -57,11 +57,59 @@
                                     <div class="form-outline mb-4">
                                         <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control form-control-lg" TextMode="Password" />
                                         <asp:Label ID="lblPassword" runat="server" AssociatedControlID="txtPassword" CssClass="form-label">Password</asp:Label>
+                                        <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource2" >
+                                            <Columns>
+                                                <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id" />
+                                                <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+                                                <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
+                                                <asp:BoundField DataField="Password" HeaderText="Password" SortExpression="Password" />
+                                            </Columns>
+                                        </asp:GridView>
+                                        <asp:SqlDataSource ID="SqlDataSource2" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString1 %>" DeleteCommand="DELETE FROM [registration] WHERE [Id] = @Id" InsertCommand="INSERT INTO [registration] ([Name], [Email], [Password]) VALUES (@Name, @Email, @Password)" ProviderName="<%$ ConnectionStrings:ProjectConnectionString1.ProviderName %>" SelectCommand="SELECT [Id], [Name], [Email], [Password] FROM [registration]" UpdateCommand="UPDATE [registration] SET [Name] = @Name, [Email] = @Email, [Password] = @Password WHERE [Id] = @Id">
+                                            <DeleteParameters>
+                                                <asp:Parameter Name="Id" Type="Int32" />
+                                            </DeleteParameters>
+                                            <InsertParameters>
+                                                <asp:Parameter Name="Name" Type="String" />
+                                                <asp:Parameter Name="Email" Type="String" />
+                                                <asp:Parameter Name="Password" Type="String" />
+                                            </InsertParameters>
+                                            <UpdateParameters>
+                                                <asp:Parameter Name="Name" Type="String" />
+                                                <asp:Parameter Name="Email" Type="String" />
+                                                <asp:Parameter Name="Password" Type="String" />
+                                                <asp:Parameter Name="Id" Type="Int32" />
+                                            </UpdateParameters>
+                                        </asp:SqlDataSource>
                                     </div>
 
                                     <div class="form-outline mb-4">
                                         <asp:TextBox ID="txtConfirmPassword" runat="server" CssClass="form-control form-control-lg" TextMode="Password" />
                                         <asp:Label ID="lblConfirmPassword" runat="server" AssociatedControlID="txtConfirmPassword" CssClass="form-label" Height="41px" >Confirm your password</asp:Label>
+                                        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" DataKeyNames="Id" DataSourceID="SqlDataSource1" >
+                                            <Columns>
+                                                <asp:BoundField DataField="Id" HeaderText="Id" ReadOnly="True" SortExpression="Id" />
+                                                <asp:BoundField DataField="Name" HeaderText="Name" SortExpression="Name" />
+                                                <asp:BoundField DataField="Email" HeaderText="Email" SortExpression="Email" />
+                                                <asp:BoundField DataField="Password" HeaderText="Password" SortExpression="Password" />
+                                            </Columns>
+                                        </asp:GridView>
+                                        <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:ProjectConnectionString1 %>" DeleteCommand="DELETE FROM [registration] WHERE [Id] = @Id" InsertCommand="INSERT INTO [registration] ([Name], [Email], [Password]) VALUES (@Name, @Email, @Password)" ProviderName="<%$ ConnectionStrings:ProjectConnectionString1.ProviderName %>" SelectCommand="SELECT [Id], [Name], [Email], [Password] FROM [registration]" UpdateCommand="UPDATE [registration] SET [Name] = @Name, [Email] = @Email, [Password] = @Password WHERE [Id] = @Id">
+                                            <DeleteParameters>
+                                                <asp:Parameter Name="Id" Type="Int32" />
+                                            </DeleteParameters>
+                                            <InsertParameters>
+                                                <asp:Parameter Name="Name" Type="String" />
+                                                <asp:Parameter Name="Email" Type="String" />
+                                                <asp:Parameter Name="Password" Type="String" />
+                                            </InsertParameters>
+                                            <UpdateParameters>
+                                                <asp:Parameter Name="Name" Type="String" />
+                                                <asp:Parameter Name="Email" Type="String" />
+                                                <asp:Parameter Name="Password" Type="String" />
+                                                <asp:Parameter Name="Id" Type="Int32" />
+                                            </UpdateParameters>
+                                        </asp:SqlDataSource>
                                     </div>
 
                                     <div class="form-check d-flex justify-content-center mb-5">
@@ -70,6 +118,7 @@
                                             I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
                                         </asp:Label>
                                     </div>
+                                   
 
                                     <!-- Register Button -->
                                     <div class="d-flex justify-content-center">

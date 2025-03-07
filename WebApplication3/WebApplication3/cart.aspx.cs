@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using WebApplication3.Properties;
 
 namespace WebApplication3
 {
@@ -12,90 +11,111 @@ namespace WebApplication3
         {
             if (!IsPostBack)
             {
-                // Retrieve the cart items from the session
-                List<CartItem> cart = (List<CartItem>)Session["Cart"];
-                if (cart != null)
-                {
-                    rptCartItems.DataSource = cart;
-                    rptCartItems.DataBind();
-                    CalculateTotal(cart);
-                }
-                else
-                {
-                    // Handle the case where the cart is empty
-                    Response.Write("<p>Your cart is empty.</p>");
-                }
+                BindCart();
             }
+        }
+
+        private void BindCart()
+        {
+            List<Product> cart = GetCart();
+            rptCartItems.DataSource = cart;
+            rptCartItems.DataBind();
+
+            // Calculate totals
+            CalculateTotals(cart);
+        }
+
+        private List<Product> GetCart()
+        {
+            if (Session["Cart"] == null)
+            {
+                Session["Cart"] = new List<Product>();
+            }
+            return (List<Product>)Session["Cart"];
         }
 
         protected void btnRemove_Click(object sender, EventArgs e)
         {
-            // Get the name of the product to remove
-            string productName = ((Button)sender).CommandArgument;
-            System.Diagnostics.Debug.WriteLine($"Removing product: {productName}");
+            Button btnRemove = (Button)sender;
+            int productId = Convert.ToInt32(btnRemove.CommandArgument);
+            List<Product> cart = GetCart();
 
-            // Retrieve the cart items from the session
-            List<CartItem> cart = (List<CartItem>)Session["Cart"];
-            if (cart != null)
+            // Find the product to remove
+            Product itemToRemove = cart.Find(p => p.ProductId == productId);
+            if (itemToRemove != null)
             {
-                // Log the current items in the cart
-                foreach (var item in cart)
-                {
-                    System.Diagnostics.Debug.WriteLine($"Cart item: {item.Name}");
-                }
-
-                // Find the item to remove
-                CartItem itemToRemove = cart.Find(item => item.Name.Equals(productName, StringComparison.OrdinalIgnoreCase));
-                if (itemToRemove != null)
-                {
-                    cart.Remove(itemToRemove);
-                    Session["Cart"] = cart; // Update the session
-                    System.Diagnostics.Debug.WriteLine($"Removed item: {itemToRemove.Name}");
-                }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine("Item not found in cart.");
-                }
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("Cart is null.");
+                cart.Remove(itemToRemove);
+                SaveCart(cart);
             }
 
-            // Rebind the cart items to the repeater
-            rptCartItems.DataSource = cart;
-            rptCartItems.DataBind();
-            CalculateTotal(cart);
+            BindCart(); // Rebind the cart to reflect changes
         }
 
-        private void CalculateTotal(List<CartItem> cart)
+        private void SaveCart(List<Product> cart)
+        {
+            Session["Cart"] = cart;
+        }
+
+        private void CalculateTotals(List<Product> cart)
         {
             decimal subtotal = 0;
+
             foreach (var item in cart)
             {
-                subtotal += item.Price * item.Quantity; // Calculate subtotal
+                subtotal += item.TotalPrice; // Use the TotalPrice property
             }
 
-            // Update the subtotal and total price in the summary
-            subtotalPrice.Text = subtotal.ToString("C"); // Format as currency
-            totalPrice.Text = subtotal.ToString("C"); // Assuming no discounts or shipping for now
+            subtotalPrice.Text = $"${subtotal:F2}";
+            totalPrice.Text = $"${subtotal:F2}"; // You can add discount and shipping logic here
+        }
+
+        protected void UpdateCartQuantities(object sender, EventArgs e)
+        {
+            List<Product> cart = GetCart();
+            foreach (RepeaterItem item in rptCartItems.Items)
+            {
+                // Find the quantity input field
+                var quantityInput = (TextBox)item.FindControl("quantity");
+                var productId = Convert.ToInt32(((Button)item.FindControl("btnRemove")).CommandArgument);
+
+                // Find the product in the cart
+                var product = cart.Find(p => p.ProductId == productId);
+                if (product != null)
+                {
+                    // Declare the newQuantity variable
+                    int newQuantity;
+
+                    // Try to parse the quantity input
+                    if (int.TryParse(quantityInput.Text, out newQuantity))
+                    {
+                        product.Quantity = newQuantity; // Update the quantity
+                    }
+                    else
+                    {
+                        // Handle the case where parsing fails (e.g., set to 1 or show an error)
+                        product.Quantity = 1; // Default to 1 if parsing fails
+                    }
+                }
+            }
+
+            
+    
+
+        SaveCart(cart); // Save the updated cart
+            CalculateTotals(cart); // Recalculate totals
         }
     }
 
-    public class CartItem
+    [Serializable]
+    public class Product
     {
-        private string productName;
-        private decimal productPrice;
-
-        public CartItem(string productName, decimal productPrice, int quantity)
-        {
-            this.productName = productName;
-            this.productPrice = productPrice;
-            Quantity = quantity;
-        }
-
+        public int ProductId { get; set; }
         public string Name { get; set; }
+        public string Color { get; set; } // New property for color
         public decimal Price { get; set; }
         public int Quantity { get; set; }
+
+        public string ImageUrl { get; set; }
+        public decimal TotalPrice => Price * Quantity; // Calculate total price for the item
     }
 }

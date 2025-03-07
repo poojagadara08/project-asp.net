@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="shop3.aspx.cs" Inherits="WebApplication3.shop3" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="shop3.aspx.cs" Inherits="WebApplication3.Properties.shop3" %>
 
 <!DOCTYPE html>
 
@@ -45,8 +45,8 @@
                 <div class="col-md-12">
                     <div class="product-card">
                         <img src="images/g-3.png" alt="Product Image" class="img-fluid" />
-                        <h3>Product Name</h3>
-                        <p>Description of the product goes here.</p>
+                        <h3>Spectra Slice Square Blue Screen Glasses</h3>
+                        <p>Color: Transparent X Black : Zero Power</p>
                         <p>Price: $70</p>
                         <asp:Button ID="btnAddToCart" runat="server" Text="Add to Cart" CssClass="btn btn-success" OnClick="btnAddToCart_Click" />
                         <asp:Button ID="btnBuyNow" runat="server" Text="Buy Now" CssClass="btn btn-primary" OnClick="btnBuyNow_Click" />

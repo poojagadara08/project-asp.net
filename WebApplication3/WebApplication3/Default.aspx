@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WebApplication3.Default" %>
+﻿    <%@ Page Title="" Language="C#" MasterPageFile="~/User.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WebApplication3.Default" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
      <!-- slider section -->
@@ -433,7 +433,7 @@
                     <input type="text" placeholder="Name">
                   </div>
                   <div>
-                    <input type="text" placeholder="Phone Number">
+                    <input type="text" placeholder="Phone Number" maxlength="10">
                   </div>
                   <div>
                     <input type="email" placeholder="Email">
